@@ -1,0 +1,35 @@
+                                                                          //Simpson-3/8
+#include <stdio.h>
+#include <math.h>
+
+// Function to integrate (example: f(x) = x^2)
+double f(double x) {
+    return x * x;
+}
+
+double simpsonsThreeEighthRule(double a, double b, int n) {
+    double h = (b - a) / n;
+    double sum = f(a) + f(b);
+    
+    // Apply Simpson's 3/8 rule
+    for (int i = 1; i < n; i++) {
+        if (i % 3 == 0) {
+            sum += 2 * f(a + i * h);
+        } else {
+            sum += 3 * f(a + i * h);
+        }
+    }
+
+    return (3 * h / 8) * sum;
+}
+
+int main()
+ {
+    double a = 0, b = 1;  // limits of integration
+    int n = 6;  // number of intervals (should be multiple of 3)
+    
+    double result = simpsonsThreeEighthRule(a, b, n);
+    printf("Integral using Simpson's 3/8 Rule: %.4f\n", result);
+    
+    return 0;
+}
